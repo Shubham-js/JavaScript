@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Event Delegation Bro</title>
+    </head>
+    <body>
+        <div>
+        <ul id="categories">
+            <li id="laptops">Laptops</li>
+            <li id="mobiles">Mobiles</li>
+            <li id="desktops">Desktops</li>
+            <li id="tablets">Tablets</li>
+            <li id="smart-watches">Smart Watches</li>
+        </ul>
+        </div>
+
+        <!-- Here data- refers to dataset like any input having this data-upperCheck attribute should follow a funcitonality  -->
+        <!-- even if you use uppercheck/upperCheck it will read it as uppercheck only -->
+        <!-- This feature is called behaviour pattern which can be achieved by event delegation -->
+        <div id="form">
+            <input type="text"id="firstname" placeholder="First Name" data-upperCheck />
+            <input type="text" id="lastname" placeholder="Last Name" data-upperCheck />
+            <input type="number" id="'mobile" placeholder="Mobile Number" />
+
+
+        </div>
+
+        <script src="./event-delegation.js"></script>
+
+    </body>
+</html>
