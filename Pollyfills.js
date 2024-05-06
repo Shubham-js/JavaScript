@@ -302,5 +302,34 @@ Promise.allPolyfill([
   .catch((error) => console.error(error));
 // we can try to reject one promise it will work as well.
 
-
 // Debounce Polyfill
+// Throttle Polyfill
+
+// ForEach polyfill
+
+const arr = [1, 2, 3, 4, 5];
+// Original
+
+// arr.forEach((item) => {
+//   item *= 2;
+//   console.log(item);
+// });
+
+// Prototype
+
+Array.prototype.myForEach = function (cb) {
+  try {
+    if (typeof cb !== "function") {
+      throw "Not a function";
+    }
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i)) cb(this[i], i, this);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+const testFunction = (item, index, arr) => {
+  console.log(item * index);
+};
+arr.myForEach(testFunction);

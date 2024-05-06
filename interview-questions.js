@@ -67,3 +67,12 @@ temp.printCounter(); // output is 0 due to closure
 
 // console.log(original);  // { a: 1, b: { c: 2 } }
 // console.log(deepCopy); // { a: 5, b: { c: 10 } }
+
+// Print Original Properties of array.
+
+Array.prototype.check = "Dummy property";
+const arr = [1, 2, 3, 4, 5];
+
+for (let v in arr) {
+  if (arr.hasOwnProperty(v)) console.log(v); // check is getting printed directly but adding this if will help.
+}
