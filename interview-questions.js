@@ -76,3 +76,57 @@ const arr = [1, 2, 3, 4, 5];
 for (let v in arr) {
   if (arr.hasOwnProperty(v)) console.log(v); // check is getting printed directly but adding this if will help.
 }
+
+
+// Very Important 
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }  
+
+const functions = [
+  async () => {
+    await sleep(2000);
+    return 1;
+  },
+  async () => {
+    await sleep(3000);
+    return 2;
+  },
+  async () => {
+    await sleep(1000);
+    return 3;
+  },
+  async () => {
+    await sleep(4000);
+    return 4;
+  }
+];
+
+batchProcess(functions, 2)
+  .then(results => console.log(results)) // should print [1, 2, 3, 4]
+  .catch(error => console.error(error));
+  
+  async function batchProcess(fn,lt){
+    let init = 0;
+    let l = fn.length;
+    let result = [];
+    try{
+    while(init<l){
+    let funcList = fn.slice(init,init+lt);
+    const response = await Promise.all(funcList.map(async(func)=>func()));
+    if(response?.error)
+    {
+      throw "Error with function at batch";
+    }
+    init+=lt;
+    result = [...result,...response];
+  }
+   }
+   catch(error)
+   {
+      console.log(error)
+   }
+   return result;
+    
+ }
