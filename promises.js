@@ -82,29 +82,29 @@
 
 //async is a keyword that makes a function async
 // an async function always returns a promise
-// async function dummy(){
-//   return "shubham";
-// }
+async function dummy() {
+  return "shubham";
+}
 
-// const x = dummy();
-// console.log(x);
+const x = dummy();
+console.log(x);
 // promise is got here as the function check if its a promise or not, if it's not a promise still it will wrap a promise around the return object.
-// x.then(res=>console.log(res));
+x.then((res) => console.log(res));
 // we will need to resolve it
-// const p = new Promise((resolve,reject)=>{
-//   setTimeout(()=>{
-//   resolve("shubham with resolve");
-//   },5000)
-// });
+const p_old = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("shubham with resolve");
+  }, 5000);
+});
 
-// async function dummy2(){
-//   return p;
-// }
+async function dummy2() {
+  return p_old;
+}
 
-// const x2 = dummy2();
-// console.log(x2);
+const x2 = dummy2();
+console.log(x2);
 
-// x2.then(res=>console.log(res));
+x2.then((res) => console.log(res));
 
 // resolving using await
 // async function resolvePromiseUsingAwait (){
@@ -115,59 +115,58 @@
 // resolvePromiseUsingAwait();
 
 // async await vs Promise .then .catch
-// function  getData(){
-
-//   // Js Engine would not wait for the promise to resolve
-//   p.then((res)=>console.log("res is ",res));
-//   console.log("Namaste Shubham")
-// }
-// getData();
+function getData() {
+  //   // Js Engine would not wait for the promise to resolve
+  p_old.then((res) => console.log("res is ", res));
+  console.log("Namaste Shubham");
+}
+getData();
 
 // Incase of async await
-// async function getDataAsyncAwait(){
-//   console.log("will work without wait")
-// // JS enginer waits for the promise to get resolved
-//   const x = await p;
-//   console.log("Namaste Shubham 2");
-//   console.log(x);
-// }
+async function getDataAsyncAwait() {
+  console.log("will work without wait");
+  // // JS enginer waits for the promise to get resolved
+  const x = await p_old;
+  console.log("Namaste Shubham 2");
+  console.log(x);
+}
 
-// getDataAsyncAwait();
+getDataAsyncAwait();
 
-// const p = new Promise((resolve,reject)=>{
-//   setTimeout(()=>{
-//   resolve("shubham p with resolve");
-//   },10000)
-// });
-// const q = new Promise((resolve,reject)=>{
-//   setTimeout(()=>{
-//   resolve("shubham q with resolve");
-//   },5000)
-// })
+const p_mid = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("shubham p with resolve");
+  }, 10000);
+});
+const q_mid = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("shubham q with resolve");
+  }, 5000);
+});
 // Incase of async await
-// async function getDataAsyncAwait(){
-//   console.log("will work without wait")
-// // JS enginer waits for the promise to get resolved
-//   const x = await p;
-//   console.log("Namaste Shubham 3");
-//   console.log(x);
-//    const y = await p;
-//   console.log("Namaste Shubham 3");
-//   console.log(y);
-//   console.log("Both x and y are printed together in order");
-// }
+async function getDataAsyncAwait() {
+  console.log("will work without wait");
+  // JS enginer waits for the promise to get resolved
+  const x = await p_mid;
+  console.log("Namaste Shubham 3");
+  console.log(x);
+  const y = await q_mid;
+  console.log("Namaste Shubham 3");
+  console.log(y);
+  console.log("Both x and y are printed together in order");
+}
 
 // getDataAsyncAwait();
-// async function getDataWithAsyncAwaitDiffPromise(){
-//   console.log("Namaste Bhai");
-//   const x = await p;
-//   console.log(x);
-//   console.log("will wait or not ?");
-//   const y = await q;
-//   console.log(y);
-//   console.log("final");
-// }
-// getDataWithAsyncAwaitDiffPromise();
+async function getDataWithAsyncAwaitDiffPromise() {
+  console.log("Namaste Bhai");
+  const x = await p_mid;
+  console.log(x);
+  console.log("will wait or not ?");
+  const y = await q_mid;
+  console.log(y);
+  console.log("final");
+}
+getDataWithAsyncAwaitDiffPromise();
 
 // Here it will first print the x and then after t seconds will print y as t for x is less than y
 // async function reverseOrder(){
@@ -181,7 +180,7 @@
 // }
 // reverseOrder();
 
-// In truth the main thread of JS in never blocked fromexeution it only apprears, what actually happens behind the scene is : the execution is suspend and the function moves out of call stack and not block the main thread or will not freeze the page.
+// In truth the main thread of JS in never blocked from exeution it only apprears, what actually happens behind the scene is : the execution is suspend and the function moves out of call stack and not block the main thread or will not freeze the page.
 // Whenever it encounters an await the function execution suspends for that time. And handle promise. is popped out of the stack, when the time is over the function reappreas in the callstack and execution continues from the line it stopped.
 
 // fetch() is a promise, which when resolved gives you a Response Object. This response object has a body which is a readable stream. To convert this readable stream to json, we do res.json(), this res.json() is again a promise which when resolved gives you the Json Value.
@@ -191,13 +190,13 @@
 const p = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve("First Promise Resolved");
-  }, 10000);
+  }, 5000);
 });
 
 const q = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve("Second Promise Resolved");
-  }, 20000);
+  }, 2000);
 });
 // All promises are started resolving simultaneously so the diff of time is considered for second promise to be resolved.
 function promiseCheck() {

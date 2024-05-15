@@ -333,3 +333,141 @@ const testFunction = (item, index, arr) => {
   console.log(item * index);
 };
 arr.myForEach(testFunction);
+
+//  debounce Polyfill
+
+// const data = "check";
+// document.querySelector("#header").innerHTML = message;
+// document.querySelector("#header").addEventListener(
+//   "click",
+//   () => {
+//     console.log("clicked");
+//     debouncedCall(data);
+//   },
+//   false
+// );
+// console.log(message);
+
+
+
+const debounce = (cb, d) => {
+  let timer;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      cb(...args);
+    }, d);
+  };
+};
+
+const debouncedCall = debounce((data) => {
+  console.log("inside click ", data);
+}, 300);
+
+// Throttle Polyfill
+
+const throttle = (cb, d) => {
+  let old = 0;
+  return function (...args) {
+    let now = new Date().getTime();
+    if (now - old < d) return;
+    old = now;
+    return cb(...args);
+  };
+};
+
+const throttledCall = throttle((data) => {
+  console.log("inside click ", data);
+}, 3000);
+
+
+// Promise.all Promise.allSettle
+
+const p1 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve("Promise 1 resolved");
+  }, 2500);
+})
+const p2 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve("Promise 2 resolved");
+  }, 500);
+})
+const p3 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve("Promise 3 resolved");
+  }, 3500);
+})
+const p4 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    reject("Promise 4 resolved");
+  }, 1500);
+})
+
+// async function PromiseAll(promises){
+
+//   return new Promise((resolve,reject)=>{
+//     if(promises.length===0) {
+//       resolve(result);
+//     }
+//       let result=[];
+//       let count = 0;
+//     promises.forEach((promise,index) => {
+//             Promise.resolve(promise).then((data) => {
+//          result[index] = data;
+//          count++
+//          if(count === promises.length) {
+//              resolve(result);
+//          }
+//      }).catch((err) => {
+//          reject(err)
+//      })
+//     })
+    
+ 
+ 
+//   })
+  
+// };
+
+// PromiseAll([p1,p2,p3,p4]).then(res=>console.log(res)).catch(err=>console.log(err));
+
+
+// async function PromiseAllSettled(promises){
+
+//   return new Promise((resolve,reject)=>{
+//     if(promises.length===0) {
+//       resolve(result);
+//     }
+//       let result=[];
+//       let count = 0;
+//     promises.forEach((promise,index) => {
+//             Promise.resolve(promise).then((data) => {
+//          result[index] = {
+//              isFulfilled:true,
+//              value:data
+             
+//          }
+//      }).catch((err) => {
+//         result[index] = {
+//              isFulfilled:false,
+//              value:err
+//         }
+        
+//      }).finally(()=>{
+//          count++
+//          if(count === promises.length) {
+//              resolve(result);
+//          }
+//      })
+//     })
+    
+ 
+ 
+//   })
+  
+// };
+
+// PromiseAllSettled([p1,p2,p3,p4]).then(res=>console.log(res)).catch(err=>console.log(err));

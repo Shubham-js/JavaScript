@@ -20,7 +20,7 @@ const printAnything = function (city, state) {
 //function borrowing
 printAnything.call(Person1, "gurgaon", "haryana");
 printAnything.call(Person2, "bangalore", "karnatka");
-
+printAnything("bangalore", "karnatka");
 //apply method
 printAnything.apply(Person1, ["gurgaon", "haryana"]);
 printAnything.apply(Person2, ["bangalore", "karnatka"]);
