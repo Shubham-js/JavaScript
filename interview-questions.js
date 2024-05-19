@@ -320,3 +320,28 @@ console.log("5");
 // Microtask execution (then callback): The callback from the Promise.then is now executed, logging "4" to the console.
 
 // Macrotask execution (setTimeout callback): Finally, the callback scheduled by setTimeout is executed, logging "2" to the console.
+
+// Flatten an array : Array.prototype.myFlat = function Flatten(){
+//     let res = [];
+//     for(let i =0;i<this.length;i++)
+//     {
+//         if(Array.isArray(this[i]))
+//         {
+
+//             // let flatArr = Flatten.call(this[i],false);
+//             let flatArr = this[i].myFlat(this[i]);
+//            res = [...res,...flatArr];
+//         }
+//         else if(this[i]!==undefined)
+//         {
+//             res.push(this[i]);
+//         }
+
+//     }
+//     return res;
+// }
+// const arr = [1,2,3,,[4,5],[5,[6,7,8,[9,10],11],12],13,14];
+// const x = arr.myFlat();
+// // const y = arr.flat();
+// console.log(x);
+// // console.log(y);

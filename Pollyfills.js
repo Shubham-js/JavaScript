@@ -506,3 +506,32 @@ async function PromiseAny(promises) {
 }
 
 // PromiseAny([p1,p2,p3,p4]).then(res=>console.log(res)).catch(err=>console.log(err));
+
+
+
+// Array.flat () Pollyfill : 
+
+Array.prototype.myFlat = function Flatten(firstCall = true){
+    let res = [];
+    for(let i =0;i<this.length;i++)
+    {
+        if(Array.isArray(this[i]) && firstCall===true)
+        {
+            
+            // let flatArr = Flatten.call(this[i],false); // This can also be done
+            let flatArr = this[i].myFlat(this[i],false);
+           res = [...res,...flatArr];
+        }
+        else if(this[i]!==undefined)
+        {
+            res.push(this[i]);
+        }
+        
+    }
+    return res;
+}
+const arr2 = [1,2,3,,[4,5],[5,[6,7,8,[9,10],11],12],13,14];
+const xx = arr2.myFlat();
+const yy = arr2.flat();
+console.log(xx);
+console.log(yy);
