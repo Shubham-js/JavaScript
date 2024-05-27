@@ -345,3 +345,23 @@ console.log("5");
 // // const y = arr.flat();
 // console.log(x);
 // // console.log(y);
+
+// Geeky Ants
+
+// const a = [{ A: 0 }, { B: 0 }, { C: 0 }];
+// const n = a.length;
+// let curr = 0;
+// function counter() {
+//   let index = curr % n;
+//   let obj = a[index];
+//   curr++;
+//   const key = Object.keys(obj);
+//   const value = Object.values(obj);
+//   a[index][`${key}`] = Number(value[0] + 1);
+//   return a[index];
+// }
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
