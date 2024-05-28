@@ -365,3 +365,62 @@ console.log("5");
 // console.log(counter());
 // console.log(counter());
 // console.log(counter());
+
+
+
+//  const arr = [
+//    { x: 6 },
+//    [{ x: 34 }, [{ x: 66 }, [{ x: 20 }]]],
+//    [{ x: [50, 25] }, { x: 4 }],
+//    { x: 22 },
+//  ];
+
+// Max ans = 75 max value of x if x is array the sum of array is the value of that x
+
+//  const findMax = (arr) => {
+//    let maxVal = 0;
+//    arr.forEach((item) => {
+//      if (Array.isArray(item)) {
+//        let recursiveCallVal = findMax(item);
+//        maxVal = Math.max(maxVal, recursiveCallVal);
+//      } else {
+//        if (Array.isArray(item["x"])) {
+//          const res = item.x.reduce((acc, curr) => (acc = acc + curr), 0);
+//          maxVal = Math.max(maxVal, res);
+//        } else {
+//          maxVal = Math.max(maxVal, item?.x);
+//        }
+//      }
+//    });
+//    return maxVal;
+//  };
+//  console.log(findMax(arr));
+
+
+// Find last word in a string
+
+// const str = "        Hello     I    Am a long  Stringggg...     ";
+// const res = getTrim(str);
+// console.log(res);
+// function getTrim(str="")
+// {
+//     if(str=="")return "";
+//     str+=" ";
+//     let word = "", last = "";
+//     for(let i =0;i<str.length;i++)
+//     {
+//         if(str[i]!=' ')
+//         {
+//             word+=str[i];
+//         }
+//         else if(word.length>0)
+//         {
+//             last = word;
+//             word="";
+//         }
+//     }
+//     return last;
+// }
+
+
+
