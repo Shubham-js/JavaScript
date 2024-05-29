@@ -14,7 +14,9 @@ const printAnything = function (city, state) {
 
 // We dont use Arrow function as they don't have context to this
 
-//The issue you're facing is because arrow functions (=>) do not have their own this context. When you use .call() to call printAnything, the this inside printAnything still refers to the outer context where it was defined, which is not what you want.
+// The issue you're facing is because arrow functions (=>) do not have their own this context. When you use .call()
+//  to call printAnything, the this inside printAnything still refers to the outer context where it was defined,
+//  which is not what you want.
 
 //call method - invoke a funtion directly by passing in a refernece which points to the this variable in the funtion;
 //function borrowing

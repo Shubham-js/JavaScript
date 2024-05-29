@@ -507,31 +507,51 @@ async function PromiseAny(promises) {
 
 // PromiseAny([p1,p2,p3,p4]).then(res=>console.log(res)).catch(err=>console.log(err));
 
+// Array.flat () Pollyfill :
 
-
-// Array.flat () Pollyfill : 
-
-Array.prototype.myFlat = function Flatten(firstCall = true){
-    let res = [];
-    for(let i =0;i<this.length;i++)
-    {
-        if(Array.isArray(this[i]) && firstCall===true)
-        {
-            
-            // let flatArr = Flatten.call(this[i],false); // This can also be done
-            let flatArr = this[i].myFlat(this[i],false);
-           res = [...res,...flatArr];
-        }
-        else if(this[i]!==undefined)
-        {
-            res.push(this[i]);
-        }
-        
+Array.prototype.myFlat = function (depth = 1) {
+  let result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (Array.isArray(this[i]) && depth > 0) {
+      result.push(...this[i].myFlat(depth - 1));
+    } else if (this[i] !== undefined) {
+      result.push(this[i]);
     }
-    return res;
-}
-const arr2 = [1,2,3,,[4,5],[5,[6,7,8,[9,10],11],12],13,14];
+  }
+  return result;
+};
+const arr2 = [1, 2, 3, , [4, 5], [5, [6, 7, 8, [9, 10], 11], 12], 13, 14];
 const xx = arr2.myFlat();
 const yy = arr2.flat();
 console.log(xx);
 console.log(yy);
+
+//  Composition Polyfill  : infininte curring
+// compose checks from right to left
+// pipe checks from left to right
+
+function addFive(a) {
+  return a + 5;
+}
+function subTwo(a) {
+  return a - 2;
+}
+function multiplyTwo(a) {
+  return a * 2;
+}
+// right to left
+const compose = (...functions) => {
+  // for input to be array keep (functions = [])
+  return (args) => {
+    return functions.reduceRight((arg, fn) => fn(arg), args);
+  };
+};
+// left to right
+const pipe = (...functions) => {
+  return (args) => {
+    return functions.reduce((arg, fn) => fn(arg), args);
+  };
+};
+const evalue = compose(addFive, subTwo, multiplyTwo);
+const pipeEval = pipe(addFive, subTwo, multiplyTwo);
+console.log(evalue(5), pipeEval(5));
