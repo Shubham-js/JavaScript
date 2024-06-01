@@ -1,3 +1,6 @@
+// VVI for reconciler diffing algorithm, react fiber, current Tree and Work in Progress Tree in React
+
+// https://namansaxena-official.medium.com/react-virtual-dom-reconciliation-and-fiber-reconciler-cd33ceb0478e
 const obj = {
   a: 5,
   b: "shubham",
