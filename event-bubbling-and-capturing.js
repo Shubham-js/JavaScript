@@ -23,4 +23,4 @@ document.querySelector("#child").addEventListener(
     // e.stopPropagation();
   },
   false // flag -> false:bubbling , true:capturing
-); // Preference Order -> Trickling/Capruting > Bubbling
+); // Preference Order -> Trickling/Capturing > Bubbling

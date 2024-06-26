@@ -12,6 +12,9 @@ const printAnything = function (city, state) {
   console.log(this.firstName, this.secondName, city, state);
 };
 
+// const printAnything2 =  (city, state)=> {
+//   console.log(this.firstName, this.secondName, city, state);
+// };
 // We dont use Arrow function as they don't have context to this
 
 // The issue you're facing is because arrow functions (=>) do not have their own this context. When you use .call()
