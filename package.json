@@ -8,7 +8,8 @@
     "start": "nodemon interview-questions.js",
     "startcall": "nodemon CallFunction.js",
     "startcurring":"nodemon Currying.js",
-    "startu:":"nodemon unacademy.js"
+    "startu:":"nodemon unacademy.js",
+    "startimp":"nodemon importat_concepts.js"
   },
   "author": "",
   "license": "ISC",

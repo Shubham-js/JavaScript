@@ -78,3 +78,101 @@ console.log(flatter(obj));
 // The JavaScript for in statement loops through the properties of an Object.
 
 // The forEach() method calls a function (a callback function) once for each array element.
+
+// Array.slice()
+
+// Syntax :
+
+// array.slice(start, end);
+
+// start :	Optional.
+// Start position. Default is 0.
+// Negative numbers select from the end of the array.
+
+// end : 	Optional.
+// End position. Default is last element.
+// Negative numbers select from the end of the array.
+
+// The slice() method returns selected elements in an array, as a new array.
+
+// The slice() method selects from a given start, up to a (not inclusive) given end.
+
+// The slice() method does not change the original array.
+
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const myBest = fruits.slice(-3, -1); // [ 'Lemon', 'Apple' ]
+
+console.log(myBest);
+
+// Array.Splice()
+
+// Syntax
+//array.splice(index, count, item1, ....., itemX)
+// index :	Required.
+// The index (position) to add or remove items.
+// A negative value counts from the end of the array.
+// count :	Optional.
+// Number of items to be removed.
+// item1, ..., :	Optional.
+// The new elements(s) to be added.
+
+// Return Value : An array containing the removed items (if any).
+// Modifies the original array.
+// Create an Array
+// const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+// At position 2, remove 1 item, add "Lemon" and "Kiwi"
+const removed = fruits.splice(2, 1, "Lemon", "Kiwi");
+console.log(removed, fruits);
+
+// Array.toSpliced()
+
+// Synatx :
+// array.toSpliced(index, count, item1, ....., itemX)
+
+// The toSpliced() method adds and/or removes array elements.
+
+// The toSpliced() method returns a new array.
+
+// The toSpliced() method does not change the original array.
+
+// The toSpliced() method is the copying version of the splice() method.
+
+// Return Value : A new array including the changes.
+
+// At position 2, remove 2 items
+// const fruitsM = ["Banana", "Orange", "Apple", "Mango"];
+
+// const fruits2 = fruitsM.toSpliced(2, 2);
+// console.log(fruits2);
+
+// ECMAScript version has to be ES2023 to run toSpliced
+
+// Array Const : The keyword const is a little misleading.
+
+// It does NOT define a constant array. It defines a constant reference to an array.
+// Because of this, we can still change the elements of a constant array.
+
+// You can create a constant array:
+const cars = ["Saab", "Volvo", "BMW"];
+
+// You can change an element:
+cars[0] = "Toyota";
+
+// You can add an element:
+cars.push("Audi");
+
+// Shadowing
+
+// function func() {
+//   var a = "Geeks";
+//   let b = "Geeks";
+
+//   if (true) {
+//     let a = "GeeksforGeeks"; // Legal Shadowing
+//     var b = "Geeks"; // Illegal Shadowing
+//     console.log(a); // It will print 'GeeksforGeeks'
+//     console.log(b); // It will print error
+//   }
+// }
+// func();
