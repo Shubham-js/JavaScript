@@ -48,3 +48,33 @@ function flatter(obj, prefix = "") {
   return flatObj;
 }
 console.log(flatter(obj));
+
+// ES 6
+// Let and Const
+// Object Destructring and Array Destructuring
+// Arrow functions
+// ... Spread operator
+// For/of
+// Map Objects
+// Set Objects
+// Classes - JavaScript Classes are templates for JavaScript Objects.
+// Promises - The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+// Symbol - Symbol is a built-in object whose constructor returns a symbol primitive — also called a Symbol value or just a Symbol
+//  — that's guaranteed to be unique. Symbols are often used to add unique property keys to an object that won't collide with keys any
+//   other code might add to the object, and which are hidden from any mechanisms other code will typically use to access the object.
+//    That enables a form of weak encapsulation, or a weak form of information hiding.
+
+// Default Parameters : ES6 allows function parameters to have default values.
+// Function Rest Parameters : The rest parameter (...) allows a function to treat an indefinite number of arguments as an array:
+
+// Rest are here : https://www.w3schools.com/js/js_es6.asp
+
+// Important !!!!
+
+// For/of and For/in and Array.forEach Loop
+
+// The JavaScript for/of statement loops through the values of an iterable objects.
+
+// The JavaScript for in statement loops through the properties of an Object.
+
+// The forEach() method calls a function (a callback function) once for each array element.
