@@ -366,8 +366,6 @@ console.log("5");
 // console.log(counter());
 // console.log(counter());
 
-
-
 //  const arr = [
 //    { x: 6 },
 //    [{ x: 34 }, [{ x: 66 }, [{ x: 20 }]]],
@@ -396,7 +394,6 @@ console.log("5");
 //  };
 //  console.log(findMax(arr));
 
-
 // Find last word in a string
 
 // const str = "        Hello     I    Am a long  Stringggg...     ";
@@ -422,5 +419,4 @@ console.log("5");
 //     return last;
 // }
 
-
-
+// Search Bar : https://codesandbox.io/p/sandbox/cr2s69

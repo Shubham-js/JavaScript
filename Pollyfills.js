@@ -555,3 +555,43 @@ const pipe = (...functions) => {
 const evalue = compose(addFive, subTwo, multiplyTwo);
 const pipeEval = pipe(addFive, subTwo, multiplyTwo);
 console.log(evalue(5), pipeEval(5));
+
+
+
+// Use State polyfill
+
+let currentState; // Simulates React's internal state storage
+let currentSetter; // Stores the setter function
+
+function useStatePolyfill(initialValue) {
+  // Set the initial state only if it's undefined
+  if (currentState === undefined) {
+    currentState = initialValue;
+  }
+
+  function setState(newValue) {
+    currentState = newValue; // Update the state
+    render(); // Trigger re-render (placeholder function)
+  }
+
+  return [currentState, setState];
+}
+
+function render() {
+  // Dummy render function to simulate the re-rendering process
+  console.log("Re-render triggered with state:", currentState);
+  App(); // Re-run the component to simulate re-rendering
+}
+
+function App() {
+  const [count, setCount] = useStatePolyfill(0);
+
+  console.log("Count:", count);
+
+  // Simulating a button click to trigger state update
+  setTimeout(() => {
+    setCount(count + 1); // This simulates updating state
+  }, 1000);
+}
+
+App();
