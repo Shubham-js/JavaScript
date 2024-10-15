@@ -420,3 +420,24 @@ console.log("5");
 // }
 
 // Search Bar : https://codesandbox.io/p/sandbox/cr2s69
+
+// Predict the output :
+
+// console.log("1");
+
+// setTimeout(() => console.log("2"), 0);
+
+// Promise.resolve().then(() => console.log("3"));
+
+// console.log("4");
+
+// new Promise((resolve) => {
+//   console.log("5");
+//   resolve();
+// }).then(() => console.log("6"));
+
+// setTimeout(() => console.log("7"), 0);
+
+// console.log("8");
+
+//  1 4 8 5 3 6 2 7
