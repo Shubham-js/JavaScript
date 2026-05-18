@@ -2,18 +2,20 @@
   "name": "javascript-tutorial",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "CallFuntion.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon interview-questions.js",
     "startcall": "nodemon CallFunction.js",
-    "startcurring":"nodemon Currying.js",
-    "startu:":"nodemon unacademy.js",
-    "startimp":"nodemon importat_concepts.js"
+    "startcurring": "nodemon Currying.js",
+    "startu:": "nodemon unacademy.js",
+    "startimp": "nodemon importat_concepts.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "ollama": "^0.6.3"
   }
 }

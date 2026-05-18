@@ -1,0 +1,20 @@
+Vite/Webpack -> bundler which bundles multiple files toghether.
+
+State -> js and UI- DOM was not in sync with e  ach other
+react -> core foundational lib, which does work of taking all referneces
+react-dom -> implementation of react for Web
+react native -> implementation of react for apps
+
+
+
+react-scripts : package -> reason for running js in index.html of react project without
+importing <script> inside the index.html file. It injects bundle.js on index.html
+
+
+incase if we build react project using vite -> we directly load it in index.html file 
+the main.js file inside src
+
+
+The {} inside the react where we write the values <div>{}</div>, this is known as
+evaulated expression, which is treated as a variable. Evaulated expression
+means a value, condition cannot be written.
