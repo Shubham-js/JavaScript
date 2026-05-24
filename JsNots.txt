@@ -1,0 +1,1099 @@
+Js is a synchronour single threaded language.
+
+Call stack -> Call stack maintains the order of execution of execution context.
+
+Execution Context -> 2 Parts 1. Variable Environment  (Memory) 2. Thread of Execution (Code)
+
+Whenver the Js program executes a Global Execution Context is created + Global Object (WIndow in case of browser)
++ this variable is created. At globla level the value of this = window incase of browser as it points to window.
+Also Lexical Environment is created  -> which is the local memory + Ref. to Lexical Environment of it's Parent.
+Lexical -> Heirarchy 
+
+Scopr Chain -> Chain of all local lexical environments aling with their parent's.
+
+
+Anything which is not inside any function is global space.
+
+Js is a loosly typed / dynamic typed language as a variable can b assigned string then number or any other value;
+
+
+Are let & const are hoisted ? -> yes , they are in the temporal dead zone for the time being.
+ var variables are attached to the global object, but let & const are in script
+
+ Temporal dead zone is the time between the hoisting of let & const variables and assigned values.
+
+ Block -> {} Also known as compound statement.
+
+
+ let & const are blocked scopr -> they are stored in a seperate memory space allocated for a block {}
+ let & const cannot be accessed outside the block.
+
+
+ var is a function scope variable 
+
+
+ {
+    var a =10;
+    let b =20;
+    const c = 30;
+    console.log(a);
+    console.log(b);
+    console.log(c);
+ }
+ 
+ console.log(a);
+    console.log(b);
+    console.log(c);
+
+
+    // output is
+
+    10
+    20
+    30
+    10
+    Reference error. 
+
+
+
+    params vs args -> args during calling , params during declaration
+
+   The ability to use functions as values, and can be passed as an arguement to another function and can be
+   returned from another function, altogther First class functions.
+
+   Arrow functions -> 
+
+Event Loop :
+
+   callback from Mutation Observe and Promises goes to microTask Queue
+   Other goes to callback Queue
+
+   starvation of tasks in the callback queue happens when some callbacks keep waiting
+    indefinitely (or for a very long time) because the event loop is continuously busy
+     executing other higher-priority tasks.
+
+
+
+A Pure Function is a function that:
+
+Always gives the same output for the same input
+Does not change anything outside itself (no side effects)
+
+An Impure Function either:
+
+gives different outputs for same input
+or modifies external state
+
+A Higher Order Function (HOF) in JavaScript is simply:
+
+A function that either:
+
+takes another function as an argument, or
+returns another function.
+
+Since JavaScript treats functions like normal values (you can store them in variables, pass them around, return them),
+ Higher Order Functions are possible.  
+
+   MUTATION OBSERVER IN JAVASCRIPT
+===============================
+
+Definition
+----------
+MutationObserver is a browser API used to watch changes in the DOM.
+
+It can detect:
+- Elements added or removed
+- Attribute changes
+- Text/content updates
+- Changes inside child nodes
+
+It replaces older deprecated mutation events like:
+- DOMNodeInserted
+- DOMNodeRemoved
+
+--------------------------------------------------
+
+WHY DO WE NEED IT?
+------------------
+
+Used when:
+- React/Vue/third-party libraries modify DOM
+- Dynamic content appears
+- Chat messages are inserted
+- Ads/widgets inject HTML
+- You need to react to DOM updates
+
+Instead of repeatedly checking using:
+
+setInterval(() => {}, 100);
+
+MutationObserver efficiently listens for changes.
+
+--------------------------------------------------
+
+BASIC SYNTAX
+------------
+
+const observer = new MutationObserver(callback);
+
+observer.observe(targetNode, options);
+
+--------------------------------------------------
+
+BASIC EXAMPLE
+-------------
+
+HTML:
+
+<div id="box"></div>
+
+JavaScript:
+
+const box = document.getElementById("box");
+
+const observer = new MutationObserver((mutationsList) => {
+  console.log("DOM changed");
+
+  mutationsList.forEach((mutation) => {
+    console.log(mutation);
+  });
+});
+
+observer.observe(box, {
+  childList: true
+});
+
+box.innerHTML = "<p>Hello</p>";
+
+Output:
+
+DOM changed
+MutationRecord {...}
+
+--------------------------------------------------
+
+HOW IT WORKS
+------------
+
+1. MutationObserver is created
+2. It starts observing a target node
+3. DOM changes occur
+4. Browser queues mutation records
+5. Callback executes asynchronously
+
+--------------------------------------------------
+
+IMPORTANT OPTIONS
+-----------------
+
+1. childList
+----------------
+Detect child addition/removal.
+
+observer.observe(node, {
+  childList: true
+});
+
+Example:
+- appendChild
+- removeChild
+- innerHTML updates
+
+--------------------------------------------------
+
+2. attributes
+--------------
+Detect attribute changes.
+
+observer.observe(node, {
+  attributes: true
+});
+
+Example:
+element.setAttribute("class", "active");
+
+--------------------------------------------------
+
+3. characterData
+-----------------
+Detect text node changes.
+
+observer.observe(node, {
+  characterData: true
+});
+
+--------------------------------------------------
+
+4. subtree
+-----------
+Observe entire subtree (nested children).
+
+observer.observe(node, {
+  subtree: true
+});
+
+Without subtree:
+Only direct children are observed.
+
+--------------------------------------------------
+
+WATCHING ATTRIBUTE CHANGES
+--------------------------
+
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((m) => {
+    console.log(m.attributeName);
+  });
+});
+
+observer.observe(box, {
+  attributes: true
+});
+
+box.setAttribute("class", "red");
+
+Output:
+
+class
+
+--------------------------------------------------
+
+MUTATION RECORD OBJECT
+----------------------
+
+Each mutation provides a MutationRecord object.
+
+Important properties:
+
+mutation.type
+mutation.target
+mutation.addedNodes
+mutation.removedNodes
+mutation.attributeName
+mutation.oldValue
+
+Example:
+
+{
+  type: "childList",
+  addedNodes: NodeList,
+  removedNodes: NodeList
+}
+
+--------------------------------------------------
+
+DISCONNECT OBSERVER
+-------------------
+
+Stop observing:
+
+observer.disconnect();
+
+--------------------------------------------------
+
+OBSERVE ENTIRE PAGE
+-------------------
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
+Commonly used by:
+- Browser extensions
+- Analytics tools
+- Auto translators
+- Automation scripts
+
+--------------------------------------------------
+
+REAL-WORLD USE CASES
+--------------------
+
+1. Chat Applications
+Detect new messages.
+
+2. Infinite Scrolling
+Track new content insertion.
+
+3. Third-Party Script Monitoring
+Detect ads/widgets.
+
+4. Auto Highlight New Content
+Highlight newly inserted comments/posts.
+
+5. Browser Extensions
+Extensions heavily use MutationObserver.
+
+--------------------------------------------------
+
+PERFORMANCE ADVANTAGE
+---------------------
+
+Instead of polling:
+
+setInterval(checkDOM, 100);
+
+MutationObserver is:
+- Event-driven
+- Efficient
+- Optimized internally
+- Triggered only when changes happen
+
+--------------------------------------------------
+
+IMPORTANT INTERVIEW CONCEPT
+---------------------------
+
+Is MutationObserver synchronous?
+
+NO.
+
+It is asynchronous.
+
+Callbacks are queued as MICROTASKS.
+
+Execution order:
+
+DOM changes happen
+↓
+Current JS finishes
+↓
+MutationObserver callback runs
+
+--------------------------------------------------
+
+EXECUTION ORDER EXAMPLE
+-----------------------
+
+const observer = new MutationObserver(() => {
+  console.log("observer");
+});
+
+observer.observe(document.body, {
+  childList: true
+});
+
+document.body.append("Hi");
+
+console.log("sync");
+
+Output:
+
+sync
+observer
+
+Reason:
+MutationObserver callback runs asynchronously.
+
+--------------------------------------------------
+
+MICROTASK QUEUE RELATION
+------------------------
+
+MutationObserver callbacks run in the microtask queue.
+
+Priority:
+
+1. Current call stack
+2. Microtasks
+3. Macrotasks
+
+Microtasks include:
+- Promise.then
+- queueMicrotask
+- MutationObserver
+
+Macrotasks include:
+- setTimeout
+- setInterval
+
+--------------------------------------------------
+
+MUTATIONOBSERVER VS EVENT LISTENER
+----------------------------------
+
+MutationObserver:
+- Watches DOM changes
+- Async
+- Detects node additions/removals
+
+Event Listener:
+- Watches user/browser events
+- Clicks, keyboard, scroll, etc.
+
+--------------------------------------------------
+
+MUTATIONOBSERVER VS OTHER OBSERVERS
+-----------------------------------
+
+MutationObserver:
+- Watches DOM structure changes
+
+ResizeObserver:
+- Watches element size changes
+
+IntersectionObserver:
+- Watches viewport visibility
+
+--------------------------------------------------
+
+ADVANCED EXAMPLE
+----------------
+
+const observer = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+
+    if (mutation.type === "childList") {
+      console.log("Children changed");
+    }
+
+    if (mutation.type === "attributes") {
+      console.log("Attribute changed");
+    }
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  attributes: true,
+  subtree: true
+});
+
+--------------------------------------------------
+
+COMMON INTERVIEW QUESTIONS
+--------------------------
+
+Q1. Why is MutationObserver better than polling?
+
+Because it reacts only when DOM changes occur
+instead of continuously checking.
+
+--------------------------------------------------
+
+Q2. Is MutationObserver synchronous or asynchronous?
+
+Asynchronous.
+
+--------------------------------------------------
+
+Q3. Does MutationObserver use callback queue?
+
+Yes.
+Its callbacks are placed in the MICROTASK QUEUE.
+
+--------------------------------------------------
+
+Q4. Can it observe nested elements?
+
+Yes, using:
+
+subtree: true
+
+--------------------------------------------------
+
+Q5. Can multiple mutations come together?
+
+Yes.
+Browser batches mutations and sends them together
+as an array of MutationRecords.
+
+--------------------------------------------------
+
+SIMPLE MEMORY TRICK
+-------------------
+
+MutationObserver =
+"Event Listener for DOM Changes"
+
+--------------------------------------------------
+
+
+
+
+
+INTERSECTION OBSERVER IN JAVASCRIPT
+==================================
+
+Definition
+----------
+IntersectionObserver is a browser API used to detect
+when an element enters or leaves another element's visibility area.
+
+Usually used to detect:
+- Element entering viewport
+- Element leaving viewport
+- Lazy loading
+- Infinite scrolling
+- Scroll-based animations
+- Visibility tracking
+
+--------------------------------------------------
+
+WHY DO WE NEED IT?
+------------------
+
+Before IntersectionObserver, developers used:
+
+window.addEventListener("scroll", () => {
+   // calculate positions manually
+});
+
+Problems:
+- Expensive
+- Frequent calculations
+- Poor performance
+- Janky scrolling
+
+IntersectionObserver solves this efficiently.
+
+--------------------------------------------------
+
+BASIC IDEA
+----------
+
+It observes:
+- A TARGET element
+- Relative to a ROOT element
+
+and tells:
+- Is it visible?
+- How much is visible?
+- When visibility changes?
+
+--------------------------------------------------
+
+BASIC SYNTAX
+------------
+
+const observer = new IntersectionObserver(callback, options);
+
+observer.observe(targetElement);
+
+--------------------------------------------------
+
+BASIC EXAMPLE
+-------------
+
+HTML:
+
+<div id="box"></div>
+
+JavaScript:
+
+const box = document.getElementById("box");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+
+    if (entry.isIntersecting) {
+      console.log("Element is visible");
+    } else {
+      console.log("Element is not visible");
+    }
+
+  });
+});
+
+observer.observe(box);
+
+--------------------------------------------------
+
+HOW IT WORKS
+------------
+
+1. Observer is created
+2. Target element is observed
+3. Browser tracks visibility changes
+4. Callback executes when intersection changes
+
+--------------------------------------------------
+
+CALLBACK PARAMETERS
+-------------------
+
+(entries, observer) => {}
+
+1. entries
+-----------
+Array of IntersectionObserverEntry objects.
+
+2. observer
+------------
+Reference to the observer itself.
+
+--------------------------------------------------
+
+INTERSECTION OBSERVER ENTRY
+---------------------------
+
+Important properties:
+
+entry.target
+entry.isIntersecting
+entry.intersectionRatio
+entry.boundingClientRect
+entry.intersectionRect
+entry.rootBounds
+entry.time
+
+--------------------------------------------------
+
+IMPORTANT PROPERTY
+------------------
+
+entry.isIntersecting
+
+TRUE:
+Element is visible/intersecting.
+
+FALSE:
+Element is outside visibility area.
+
+--------------------------------------------------
+
+INTERSECTION RATIO
+------------------
+
+entry.intersectionRatio
+
+Represents:
+How much of element is visible.
+
+Examples:
+
+0
+→ completely hidden
+
+0.5
+→ 50% visible
+
+1
+→ fully visible
+
+--------------------------------------------------
+
+OPTIONS OBJECT
+---------------
+
+const observer = new IntersectionObserver(callback, {
+   root,
+   rootMargin,
+   threshold
+});
+
+--------------------------------------------------
+
+1. root
+--------
+
+Defines visibility container.
+
+Default:
+null
+
+Meaning:
+Browser viewport.
+
+Example:
+
+{
+  root: document.querySelector(".container")
+}
+
+Now visibility is checked relative to container.
+
+--------------------------------------------------
+
+2. rootMargin
+--------------
+
+Adds margin around root.
+
+Example:
+
+{
+  rootMargin: "100px"
+}
+
+Meaning:
+Trigger intersection 100px before entering viewport.
+
+Useful for:
+- Lazy loading images early
+- Prefetching content
+
+--------------------------------------------------
+
+3. threshold
+-------------
+
+Defines when callback should trigger.
+
+Example:
+
+{
+  threshold: 0.5
+}
+
+Meaning:
+Callback runs when 50% visible.
+
+--------------------------------------------------
+
+THRESHOLD EXAMPLES
+------------------
+
+0
+→ trigger when even 1 pixel visible
+
+1
+→ trigger when fully visible
+
+0.5
+→ trigger at 50% visibility
+
+--------------------------------------------------
+
+MULTIPLE THRESHOLDS
+-------------------
+
+{
+  threshold: [0, 0.25, 0.5, 0.75, 1]
+}
+
+Callback triggers at all these visibility percentages.
+
+--------------------------------------------------
+
+LAZY LOADING IMAGE EXAMPLE
+--------------------------
+
+HTML:
+
+<img data-src="image.jpg" class="lazy">
+
+JavaScript:
+
+const images = document.querySelectorAll(".lazy");
+
+const observer = new IntersectionObserver((entries, observer) => {
+
+  entries.forEach((entry) => {
+
+    if (entry.isIntersecting) {
+
+      const img = entry.target;
+
+      img.src = img.dataset.src;
+
+      observer.unobserve(img);
+    }
+
+  });
+
+});
+
+images.forEach((img) => observer.observe(img));
+
+--------------------------------------------------
+
+WHY unobserve()?
+----------------
+
+Once image loads,
+we no longer need observation.
+
+--------------------------------------------------
+
+INFINITE SCROLL EXAMPLE
+-----------------------
+
+const loader = document.querySelector("#loader");
+
+const observer = new IntersectionObserver((entries) => {
+
+  if (entries[0].isIntersecting) {
+     loadMoreData();
+  }
+
+});
+
+observer.observe(loader);
+
+When loader becomes visible:
+→ fetch more data.
+
+--------------------------------------------------
+
+SCROLL ANIMATION EXAMPLE
+------------------------
+
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver((entries) => {
+
+  entries.forEach((entry) => {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+
+  });
+
+});
+
+sections.forEach((section) => observer.observe(section));
+
+--------------------------------------------------
+
+DISCONNECT OBSERVER
+-------------------
+
+observer.disconnect();
+
+Stops observing all elements.
+
+--------------------------------------------------
+
+UNOBSERVE SINGLE ELEMENT
+------------------------
+
+observer.unobserve(element);
+
+Stops observing specific element.
+
+--------------------------------------------------
+
+REAL-WORLD USE CASES
+--------------------
+
+1. Lazy Loading Images
+2. Infinite Scroll
+3. Analytics Tracking
+4. Ad Visibility Tracking
+5. Scroll Animations
+6. Video Auto Play/Pause
+7. Detect Visible Sections
+8. Virtualized Lists
+
+--------------------------------------------------
+
+PERFORMANCE ADVANTAGE
+---------------------
+
+Instead of continuously running:
+
+scroll event + getBoundingClientRect()
+
+IntersectionObserver:
+- Browser optimized
+- More efficient
+- Reduces calculations
+- Improves scrolling performance
+
+--------------------------------------------------
+
+IMPORTANT INTERVIEW CONCEPT
+---------------------------
+
+Is IntersectionObserver synchronous?
+
+NO.
+
+It is asynchronous.
+
+Browser batches visibility updates efficiently.
+
+--------------------------------------------------
+
+INTERSECTIONOBSERVER VS SCROLL EVENT
+------------------------------------
+
+Scroll Event:
+- Fires continuously
+- Expensive
+- Manual calculations required
+
+IntersectionObserver:
+- Efficient
+- Optimized internally
+- Event-driven
+- Cleaner API
+
+--------------------------------------------------
+
+INTERSECTIONOBSERVER VS MUTATIONOBSERVER
+----------------------------------------
+
+IntersectionObserver:
+- Watches visibility changes
+
+MutationObserver:
+- Watches DOM changes
+
+--------------------------------------------------
+
+INTERSECTIONOBSERVER VS RESIZEOBSERVER
+--------------------------------------
+
+IntersectionObserver:
+- Watches visibility
+
+ResizeObserver:
+- Watches size changes
+
+--------------------------------------------------
+
+EXECUTION FLOW
+--------------
+
+Element visibility changes
+↓
+Browser detects intersection
+↓
+Callback queued
+↓
+Callback executes asynchronously
+
+--------------------------------------------------
+
+ADVANCED EXAMPLE
+----------------
+
+const observer = new IntersectionObserver((entries) => {
+
+  entries.forEach((entry) => {
+
+    console.log("Visible:", entry.isIntersecting);
+
+    console.log("Ratio:", entry.intersectionRatio);
+
+  });
+
+}, {
+  root: null,
+  rootMargin: "100px",
+  threshold: [0, 0.5, 1]
+});
+
+observer.observe(document.querySelector(".box"));
+
+--------------------------------------------------
+
+COMMON INTERVIEW QUESTIONS
+--------------------------
+
+Q1. Why is IntersectionObserver better than scroll events?
+
+Because browser optimizes visibility calculations internally,
+improving performance.
+
+--------------------------------------------------
+
+Q2. What does threshold mean?
+
+It defines at what visibility percentage
+callback should trigger.
+
+--------------------------------------------------
+
+Q3. What is root?
+
+The container relative to which visibility is checked.
+
+--------------------------------------------------
+
+Q4. What is rootMargin?
+
+Extra margin around root before triggering visibility.
+
+--------------------------------------------------
+
+Q5. Is IntersectionObserver async?
+
+YES.
+
+--------------------------------------------------
+
+Q6. What does isIntersecting mean?
+
+TRUE:
+Element is visible.
+
+FALSE:
+Element is outside visible area.
+
+--------------------------------------------------
+
+Q7. Difference between observe() and unobserve()?
+
+observe():
+Starts tracking element.
+
+unobserve():
+Stops tracking specific element.
+
+--------------------------------------------------
+
+Q8. Can one observer observe multiple elements?
+
+YES.
+
+--------------------------------------------------
+
+SIMPLE MEMORY TRICK
+-------------------
+
+IntersectionObserver =
+"Visibility Detector"
+
+--------------------------------------------------
+
+
+
+
+
+
+
+
+JAVASCRIPT RUNTIME ENVIRONMENT
+==============================
+
+Definition
+----------
+A JavaScript Runtime Environment is the environment
+where JavaScript code executes.
+
+It provides:
+- JS Engine
+- Memory management
+- Event loop
+- APIs
+- Callback queues
+- Timers
+- Async handling
+
+Without a runtime environment,
+JavaScript cannot interact with the outside world.
+
+
+Callbacks and promises are ways to handle async tasks in Javascript.
+
+Issues with callback
+========================================
+
+Callback Hell (Pyramid of Doom) :
+
+Callback Hell happens when multiple asynchronous operations are nested inside each other using callbacks,
+ making the code difficult to read, debug, and maintain. It is also called the Pyramid of Doom because the
+  indentation keeps increasing like a pyramid.
+
+
+Inversion of control :
+
+Instead of you controlling when a function is executed, you give control to someone else
+ (another function/library/framework), and they decide when to execute your code.
+
+ ===========================================================================================

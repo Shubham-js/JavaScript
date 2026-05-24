@@ -1,0 +1,130 @@
+===============================
+REACT COMPONENT LIFECYCLE
+===============================
+
+React component lifecycle refers to the different phases
+a component goes through from creation to removal.
+
+--------------------------------
+1. MOUNTING PHASE
+--------------------------------
+Component is created and added to the DOM.
+
+Order of execution:
+
+1. constructor()
+   - Initialize state
+   - Bind methods
+
+2. static getDerivedStateFromProps()
+   - Sync state with props
+
+3. render()
+   - Returns JSX/UI
+
+4. componentDidMount()
+   - Runs after component is added to DOM
+   - Best place for:
+     * API calls
+     * Event listeners
+     * Timers
+
+--------------------------------
+2. UPDATING PHASE
+--------------------------------
+Occurs when state or props change.
+
+Order of execution:
+
+1. static getDerivedStateFromProps()
+
+2. shouldComponentUpdate()
+   - Controls re-rendering
+   - Returns true/false
+
+3. render()
+
+4. getSnapshotBeforeUpdate()
+   - Capture DOM info before update
+
+5. componentDidUpdate()
+   - Runs after update
+   - Used for:
+     * API calls after updates
+     * DOM operations
+
+--------------------------------
+3. UNMOUNTING PHASE
+--------------------------------
+Component is removed from DOM.
+
+Method:
+
+1. componentWillUnmount()
+   - Cleanup method
+   - Used for:
+     * Clearing timers
+     * Removing event listeners
+     * Cancelling subscriptions
+
+--------------------------------
+FUNCTIONAL COMPONENT LIFECYCLE
+(HOOKS)
+--------------------------------
+
+React Hooks replace lifecycle methods.
+
+Main Hook:
+useEffect()
+
+Example:
+
+useEffect(() => {
+   console.log("Mounted");
+
+   return () => {
+      console.log("Unmounted");
+   };
+}, []);
+
+Behavior:
+
+1. useEffect(() => {})
+   - Runs after every render
+
+2. useEffect(() => {}, [])
+   - Runs only once
+   - Similar to componentDidMount()
+
+3. useEffect(() => {}, [value])
+   - Runs whenever 'value' changes
+
+--------------------------------
+CLASS vs HOOKS MAPPING
+--------------------------------
+
+componentDidMount
+   -> useEffect(() => {}, [])
+
+componentDidUpdate
+   -> useEffect(() => {}, [dependency])
+
+componentWillUnmount
+   -> cleanup function inside useEffect
+
+--------------------------------
+SHORT SUMMARY
+--------------------------------
+
+Mounting
+   -> Component appears
+
+Updating
+   -> State/Props change
+
+Unmounting
+   -> Component removed
+
+Modern React mostly uses:
+Functional Components + Hooks
+===============================

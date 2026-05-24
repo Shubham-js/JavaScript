@@ -1,0 +1,12 @@
+Safe Security :
+
+Round 1 :
+http vs https
+process vs threade
+event loop
+
+
+SMC :
+Round 1 :
+Indexing in SQL
+Life cycle of a component in React
